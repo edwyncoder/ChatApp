@@ -31,6 +31,10 @@ io.on('connection', (socket) => {
         });
         io.to(data.roomid).emit('msg_rcvd', data);
     });
+
+    socket.on('typing', (data) => {
+        socket.broadcast.to(data.roomid).emit('someone_typing');
+    })
 });
 
 app.use('/', express.static(__dirname + '/public'));
